@@ -15,12 +15,12 @@ class New(BaseItems):
         upload_to='blog/images', default='blog/images/default.jpg', null=True
     )
     def __str__(self):
-        return self.title + ',' + self.subtitle
+        return self.title
 
 class Event(BaseItems):
     start_date = models.DateTimeField('started at', blank=False, null=False)
     end_date = models.DateTimeField('finished at', blank=False, null=False)
     list_display = ('title', 'subtitle', 'start_date', 'end_date')
     def __str__(self):
-        return self.title + ',' + self.subtitle
+        return self.title
 
