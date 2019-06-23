@@ -1,13 +1,6 @@
-{% load static %}
-<html>
-<head>
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
-</head>
-<div class="header">
-	<a href="/"><h1>Blog</h1></a>
-</div>
-<div class="body">
+{% extends 'blog/base.html' %}
+{% block content %}
+
 {% if latest_news_list %}
     <div class="news_container">
     	<h1 id="underlined">News</h1>
@@ -36,7 +29,4 @@
 {% else %}
     <p>No events available.</p>
 {% endif %}
-</div>
-<div class="footer">
-</div>
-</html>
+{% endblock %}
