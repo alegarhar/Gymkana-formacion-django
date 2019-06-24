@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
+from django.views.generic.base import TemplateView
 # Create your views here.
 
 from .models import New, Event
@@ -58,7 +59,16 @@ def news_delete(request, news_id):
     return render(request, 'blog/news_delete.html')
 
 
-class NewsCreate(FormView):
-    template_name = 'post_create.html'
+class NewsCreate(CreateView):
+    template_name = 'blog/post_create.html'
     form_class = NewNews
-    success_url = ''
+    success_url = 'create'
+
+
+class NewsView(TemplateView):
+    template_name = 'blog/news_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news_list'] = New.objects.all()
+        return context
