@@ -11,4 +11,4 @@ class NewNews(forms.ModelForm):
 
     class Meta:
         model = New
-        fields = ('title', 'subtitle', 'body', 'image')
+        fields = ('id', 'title', 'image', 'subtitle', 'body',)

@@ -15,7 +15,7 @@ class New(BaseItems):
     image = models.ImageField(
         upload_to='', default='default.png', null=True
     )
-    list_display = ('title', 'subtitle', 'publish_date')
+    # list_display = ('title', 'subtitle', 'publish_date')
 
     def __str__(self):
         return self.title
