@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic.edit import CreateView
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 # Create your views here.
 
@@ -72,3 +72,21 @@ class NewsView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['news_list'] = New.objects.all()
         return context
+
+
+class NewsViewDetail(TemplateView):
+    template_name = 'blog/news_view_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news'] = get_object_or_404(New, pk=context['news_id'])
+        return context
+
+
+class NewsEdit(UpdateView):
+    model = New
+    fields = ['id', 'title', 'image', 'subtitle', 'body', ]
+    template_name = 'blog/news_edit.html'
+
+    def get_success_url(self):
+        return reverse('news_view_detail_class', kwargs={'news_id': self.object.id})
