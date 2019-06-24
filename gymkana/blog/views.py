@@ -22,10 +22,7 @@ def news_create(request):
     if request.method == 'POST':
         form = NewNews(request.POST, request.FILES)
         if form.is_valid():
-            print ("form was valid TEST")
-            post = form.save(commit=False)
-            post.publish_date = timezone.now()
-            post.save()
+            form.save()
     return render(request, 'blog/post_create.html', {'form': form})
 
 
@@ -47,6 +44,7 @@ def news_edit(request, news_id):
     if request.method == 'POST':
         form = NewNews(request.POST or None, files=request.FILES or None, instance=aux)
         if form.is_valid():
+            import pdb;pdb.set_trace()
             form.save()
     else:
         form = NewNews(instance=aux, initial={'news_id': news_id})
