@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.views.generic.edit import FormView
 # Create your views here.
 
 from .models import New, Event
@@ -56,3 +56,9 @@ def news_delete(request, news_id):
         aux.delete()
         return redirect('news_view')
     return render(request, 'blog/news_delete.html')
+
+
+class NewsCreate(FormView):
+    template_name = 'post_create.html'
+    form_class = NewNews
+    success_url = ''
