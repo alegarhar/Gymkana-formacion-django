@@ -1,5 +1,4 @@
-from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 
@@ -44,8 +43,16 @@ def news_edit(request, news_id):
     if request.method == 'POST':
         form = NewNews(request.POST or None, files=request.FILES or None, instance=aux)
         if form.is_valid():
-            import pdb;pdb.set_trace()
             form.save()
     else:
         form = NewNews(instance=aux, initial={'news_id': news_id})
     return render(request, 'blog/news_edit.html', {'form': form})
+
+
+def news_delete(request, news_id):
+    aux = get_object_or_404(New, pk=news_id)
+    if request.method == 'POST':
+        aux.image.delete()
+        aux.delete()
+        return redirect('news_view')
+    return render(request, 'blog/news_delete.html')
