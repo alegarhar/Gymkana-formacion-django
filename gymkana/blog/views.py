@@ -40,3 +40,14 @@ def news_view(request):
 def news_view_detail(request, news_id):
     news = get_object_or_404(New, pk=news_id)
     return render(request, 'blog/news_view_detail.html', {'news': news})
+
+
+def news_edit(request, news_id):
+    aux = get_object_or_404(New, pk=news_id)
+    if request.method == 'POST':
+        form = NewNews(request.POST or None, files=request.FILES or None, instance=aux)
+        if form.is_valid():
+            form.save()
+    else:
+        form = NewNews(instance=aux, initial={'news_id': news_id})
+    return render(request, 'blog/news_edit.html', {'form': form})

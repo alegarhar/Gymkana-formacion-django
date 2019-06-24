@@ -10,6 +10,13 @@ div.header{
 	top:0;
 	z-index: 2;
 }
+a.button{
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    position: absolute;
+    left:50%;
+}
 a h1 {
 	text-align:  center;
 	text-decoration: underline;
