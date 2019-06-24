@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 # Create your views here.
@@ -27,3 +27,16 @@ def news_create(request):
             post.publish_date = timezone.now()
             post.save()
     return render(request, 'blog/post_create.html', {'form': form})
+
+
+def news_view(request):
+    news_list = New.objects.all()
+    context = {
+        'news_list': news_list,
+    }
+    return render(request, 'blog/news_view.html', context)
+
+
+def news_view_detail(request, news_id):
+    news = get_object_or_404(New, pk=news_id)
+    return render(request, 'blog/news_view_detail.html', {'news': news})
