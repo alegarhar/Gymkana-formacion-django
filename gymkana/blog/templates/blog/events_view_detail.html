@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#delete_button').on("click", function() {
+        if (window.confirm("Do you really want to leave?")) { 
+            window.open("delete/{{ events.id }}");
+        }
+        });
+    });
+</script>
+    <div class="news_container">
+        <h1 id="underlined">Events</h1>
+        <div class="news_wrapper">
+        <div class = "news_title"><h1>{{ events.title }}</h1></div>
+        <div class = "news_subtitle"><h2>{{ events.subtitle }}</h2></div>
+        <div class = "news_body"><p>{{ events.body }}</p></div>
+        <div class = "news_body"><p>{{ events.start_date }}</p></div>
+        <div class = "news_body"><p>{{ events.end_date }}</p></div>
+        <a href="edit/{{ events.id }}" class="button">EDITAR</a>
+        <a id="delete_button" class="button">BORRAR</a>
+        </div>
+    </div>
+{% endblock %}

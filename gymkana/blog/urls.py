@@ -15,4 +15,9 @@ urlpatterns = [
     path('v2/news/view/<int:news_id>', views.NewsViewDetail.as_view(), name='news_view_detail_class'),
     path('v2/news/view/edit/<int:pk>', views.NewsEdit.as_view(), name='news_edit_class'),
     path('v2/news/view/delete/<int:pk>', views.NewsDelete.as_view(), name='news_delete_class'),
+    path('v2/events/create', views.EventsCreate.as_view(), name='events_create_class'),
+    path('v2/events/view', views.EventsView.as_view(), name='events_view_class'),
+    path('v2/events/view/<int:event_id>', views.EventsViewDetail.as_view(), name='events_view_detail_class'),
+    path('v2/events/view/edit/<int:pk>', views.EventsEdit.as_view(), name='events_edit_class'),
+    path('v2/events/view/delete/<int:pk>', views.EventsDelete.as_view(), name='events_delete_class'),
 ]

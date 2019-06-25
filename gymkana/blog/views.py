@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 # Create your views here.
 
 from .models import New, Event
-from .forms import NewNews
+from .forms import NewNews, NewEvents
 
 
 def index(request):
@@ -97,3 +97,44 @@ class NewsDelete(DeleteView):
     model = New
     success_url = reverse_lazy('news_view_class')
     template_name = 'blog/news_delete.html'
+
+
+class EventsCreate(CreateView):
+    template_name = 'blog/post_create.html'
+    form_class = NewEvents
+    success_url = 'create'
+
+
+class EventsView(TemplateView):
+    template_name = 'blog/events_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['events_list'] = Event.objects.all()
+        return context
+
+
+class EventsViewDetail(TemplateView):
+    template_name = 'blog/events_view_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['events'] = get_object_or_404(Event, pk=context['event_id'])
+        return context
+
+
+class EventsEdit(UpdateView):
+    model = Event
+    form_class = NewEvents
+    template_name = 'blog/events_edit.html'
+
+    def get_success_url(self):
+        return reverse('events_view_detail_class', kwargs={'event_id': self.object.id})
+
+
+class EventsDelete(DeleteView):
+    model = Event
+    success_url = reverse_lazy('events_view_class')
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)

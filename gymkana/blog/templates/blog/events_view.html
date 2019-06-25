@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+{% if events_list %}
+    <div class="news_container">
+        <h1 id="underlined">Events</h1>
+    {% for events in events_list %}
+        <a href="view/{{ events.id }}"><div class="news_wrapper">
+        <div class = "events_title"><h1>{{ events.title }}</h1></div>
+        <div class = "events_subtitle"><h2>{{ events.start_date }}</h2></div>
+        </div></a>
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No events available.</p>
+{% endif %}
+{% endblock %}
