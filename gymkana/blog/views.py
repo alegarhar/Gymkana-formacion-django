@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.views.generic.edit import CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 # Create your views here.
 
@@ -90,3 +91,9 @@ class NewsEdit(UpdateView):
 
     def get_success_url(self):
         return reverse('news_view_detail_class', kwargs={'news_id': self.object.id})
+
+
+class NewsDelete(DeleteView):
+    model = New
+    success_url = reverse_lazy('news_view_class')
+    template_name = 'blog/news_delete.html'
