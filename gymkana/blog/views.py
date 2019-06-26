@@ -54,8 +54,11 @@ def news_edit(request, news_id):
 def news_delete(request, news_id):
     aux = get_object_or_404(New, pk=news_id)
     if request.method == 'POST':
-        aux.image.delete()
-        aux.delete()
+        if aux.image.name != "default.png":
+            aux.image.delete()
+            aux.delete()
+        else:
+            aux.delete()
         return redirect('news_view')
     return render(request, 'blog/news_delete.html')
 
@@ -102,7 +105,9 @@ class NewsDelete(DeleteView):
 class EventsCreate(CreateView):
     template_name = 'blog/post_create.html'
     form_class = NewEvents
-    success_url = 'create'
+
+    def get_success_url(self):
+        return reverse('events_view_detail_class', kwargs={'event_id': self.object.id})
 
 
 class EventsView(TemplateView):

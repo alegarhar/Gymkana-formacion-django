@@ -3,7 +3,8 @@
 
 {% if latest_news_list %}
     <div class="news_container">
-    	<h1 id="underlined">News</h1>
+    	<h1 class="underlined"><a href="v1/news/view">News(v1)</a>
+        <a href="v2/news/view">News(v2)</a></h1>
     {% for new in latest_news_list %}
     	<div class="news_wrapper">
         <div class = "news_title"><h1>{{ new.title }}</h1></div>
@@ -17,7 +18,7 @@
 {% endif %}
 {% if latest_events_list %}
     <div class="events_container">
-    	<h1 id="underlined">Events</h1>
+    	<h1 class="underlined"><a href="v2/events/view">Events</a></h1>
     {% for event in latest_events_list %}
     	<div class="event_wrapper">
         <div class = "event_title"><h1>{{ event.title }}</h1></div>
